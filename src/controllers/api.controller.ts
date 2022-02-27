@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
+import sharp from 'sharp';
 
-function processImage(req: Request, res: Response) {
-  res.send('Hello');
+async function processImage(req: Request, res: Response) {
+  const { filename, width, height } = req.query;
+
+  res.send({ filename, width, height });
 }
 
 export default { processImage };
