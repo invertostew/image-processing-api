@@ -5,7 +5,7 @@ import sharp from 'sharp';
 
 async function processImage(req: Request, res: Response) {
   const assetsDir = path.resolve(__dirname, '..', '..', 'assets');
-  
+
   const filename = req.query.filename;
   const width = parseInt(req.query.width as string);
   const height = parseInt(req.query.height as string);
