@@ -4,7 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const api_router_1 = __importDefault(require("./routes/api.router"));
-const app = (0, express_1.default)();
-app.use('/api', api_router_1.default);
-exports.default = app;
+const apiRouter = express_1.default.Router();
+apiRouter.get('/images', (req, res) => {
+    res.sendStatus(200);
+});
+exports.default = apiRouter;
