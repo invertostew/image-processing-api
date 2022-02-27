@@ -6,6 +6,8 @@ import apiController from '../controllers/api.controller';
 
 const apiRouter = express.Router();
 
-apiRouter.get('/images', validateImageQuery, checkImageExists, apiController.processImage);
+const apiMiddleware = [validateImageQuery, checkImageExists];
+
+apiRouter.get('/images', apiMiddleware, apiController.processImage);
 
 export default apiRouter;

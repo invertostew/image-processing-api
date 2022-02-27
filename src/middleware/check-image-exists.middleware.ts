@@ -4,16 +4,11 @@ import fs from 'fs';
 import { Request, Response, NextFunction } from 'express';
 
 function checkImageExists(req: Request, res: Response, next: NextFunction) {
-  const filename = req.query.filename as string;
-  const width = req.query.width as string;
-  const height = req.query.height as string;
+  const { filename, width, height } = req.params;
+  const resizedImage = path.resolve(__dirname, '..', '..', 'assets', 'resized', `${filename}-${width}x${height}.jpg`);
 
-  const filePath = path.resolve(__dirname, '..', '..', 'assets', 'resized', `${filename}-${width}x${height}.jpg`);
-
-  const fileExists = fs.existsSync(filePath);
-
-  if (fileExists) {
-    return res.sendFile(filePath);
+  if (fs.existsSync(resizedImage)) {
+    return res.sendFile(resizedImage);
   }
 
   next();

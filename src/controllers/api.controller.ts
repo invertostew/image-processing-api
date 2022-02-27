@@ -4,20 +4,19 @@ import { Request, Response } from 'express';
 import sharp from 'sharp';
 
 async function processImage(req: Request, res: Response) {
-  const assetsDir = path.resolve(__dirname, '..', '..', 'assets');
-
-  const filename = req.query.filename;
-  const width = parseInt(req.query.width as string);
-  const height = parseInt(req.query.height as string);
+  const { filename, width, height } = req.query;
+  const fullSizeImage = path.resolve(__dirname, '..', '..', 'assets', 'full', `${filename}.jpg`);
+  const resizedImage = path.resolve(__dirname, '..', '..', 'assets', 'resized', `${filename}-${width}x${height}.jpg`);
 
   try {
-    await sharp(`${assetsDir}/full/${filename}.jpg`)
-      .resize(width, height)
-      .toFile(`${assetsDir}/resized/${filename}-${width}x${height}.jpg`);
+    await sharp(fullSizeImage)
+      .resize(Number(width), Number(height))
+      .toFile(resizedImage);
 
-    res.sendFile(`${assetsDir}/resized/${filename}-${width}x${height}.jpg`);
+    res.sendFile(resizedImage);
   } catch (err) {
-    res.status(500).json(err);
+    // res.status(500).json(err);
+    res.send(err);
   }
 }
 
