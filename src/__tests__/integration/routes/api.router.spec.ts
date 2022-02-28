@@ -11,8 +11,13 @@ describe('Test endpoint responses', () => {
     expect(response.status).toEqual(400);
   });
 
-  it('GET /api/images with correct arguments produces 200 status code', async () => {
-    const response = await request.get('/api/images?filename=filename&width=200&height=200');
+  xit('GET /api/images with correct arguments produces 200 status code', async () => {
+    const response = await request.get('/api/images?filename=fjord&width=200&height=200');
+    expect(response.status).toEqual(200);
+  });
+
+  xit('GET /api/images with correct arguments in a different order produces 200 status code', async () => {
+    const response = await request.get('/api/images?width=500&filename=palmtunnel&height=500');
     expect(response.status).toEqual(200);
   });
 
