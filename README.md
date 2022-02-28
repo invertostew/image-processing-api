@@ -19,9 +19,21 @@ The purpose of this project was to get some real-world practice using Node.js an
 ## Documentation
 As of now, there is only one route. You must provide a `filename`, `width`, and `height` as query arguments, e.g:
 
-`http://localhost:3000/api/images?filename=fjord&width=200&height=200`
+`http://localhost:3000/api/images?filename=encenadaport&width=200&height=200`
 
-* If any of the arguments are empty, the server will respond with a `400 Bad Request` and an error message.
+* If there are either no query parameters, or the filename is missing, the server will respond with a list of possible images.
 * If the `filename` does not exist, the server will respond with a `400 Bad Request` and an error message.
-* If everything is OK, the server will respond with a `200 OK` and you will see the resized image.
+* If the `filename` is a part of the query parameters, but the `width` or `height` query parameters are missing, the server will respond with a `400 Bad Request`, and an error message.
+* If all the necessary query parameters are provided, the server will respond with a `200 OK` and you will see the resized image.
 * If the image has already been processed at the same size, then the server will serve the same image rather than re-processing the image unnecessarily.
+
+### List of available images
+* encenadaport
+* fjord
+* icelandwaterfall
+* palmtunnel
+* santamonica
+
+## Future Plans
+* Currently, only JPGs can be processed (as requested), in the future it would be good to add support multiple file formats.
+* Batch image resizing could be a good future goal too. Allowing the user to provide a list of images, as oppose to a single image.
