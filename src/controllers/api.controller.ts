@@ -15,8 +15,7 @@ async function processImage(req: Request, res: Response) {
 
     res.sendFile(resizedImage);
   } catch (err) {
-    // res.status(500).json(err);
-    res.send(err);
+    res.status(500).json(err);
   }
 }
 
