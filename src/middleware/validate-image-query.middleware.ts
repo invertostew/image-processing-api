@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 function validateImageQuery(req: Request, res: Response, next: NextFunction) {
   const { filename, width, height } = req.query;

@@ -1,9 +1,9 @@
-import express from 'express';
+import express from "express";
 
-import apiRouter from './routes/api.router';
+import apiRouter from "./routes/api.router";
 
 const app = express();
 
-app.use('/api', apiRouter);
+app.use("/api", apiRouter);
 
 export default app;
