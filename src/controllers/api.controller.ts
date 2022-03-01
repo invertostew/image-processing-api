@@ -1,10 +1,18 @@
 import path from "path";
+import fs, { promises as fsPromises } from "fs";
 
 import { Request, Response } from "express";
 import sharp from "sharp";
 
 async function processImage(req: Request, res: Response) {
   const { filename, width, height } = req.query;
+  const resizedDir = path.resolve(
+    __dirname,
+    "..",
+    "..",
+    "assets",
+    "resized"
+  );
   const fullSizeImage = path.resolve(
     __dirname,
     "..",
@@ -21,6 +29,10 @@ async function processImage(req: Request, res: Response) {
     "resized",
     `${filename}-${width}x${height}.jpg`
   );
+
+  if (!fs.existsSync(resizedDir)) {
+    await fsPromises.mkdir(path.join(__dirname, "..", "..", "assets", "resized"));
+  }
 
   try {
     await sharp(fullSizeImage)

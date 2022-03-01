@@ -27,7 +27,7 @@ describe("Test endpoint responses", () => {
       expect(response.text).toEqual("Please append '&height=<HEIGHT>' to the URL. Example: &height=500");
     });
 
-    xit("GET /api/images with correct arguments produces 200 status code", async () => {
+    it("GET /api/images with correct arguments produces 200 status code", async () => {
       const response = await request.get(
         "/api/images?filename=fjord&width=250&height=250"
       );
