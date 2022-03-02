@@ -13,7 +13,7 @@ describe("processImage", () => {
       const response = await request.get(
         "/api/images?filename=random&height=200&width=200"
       );
-      expect(response.status).toEqual(500);
+      expect(response.status).toEqual(400);
     });
   });
 
