@@ -6,13 +6,7 @@ import sharp from "sharp";
 
 async function processImage(req: Request, res: Response) {
   const { filename, width, height } = req.query;
-  const resizedDir = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    "assets",
-    "resized"
-  );
+  const resizedDir = path.resolve(__dirname, "..", "..", "assets", "resized");
   const fullSizeImage = path.resolve(
     __dirname,
     "..",
@@ -31,7 +25,9 @@ async function processImage(req: Request, res: Response) {
   );
 
   if (!fs.existsSync(resizedDir)) {
-    await fsPromises.mkdir(path.join(__dirname, "..", "..", "assets", "resized"));
+    await fsPromises.mkdir(
+      path.join(__dirname, "..", "..", "assets", "resized")
+    );
   }
 
   try {

@@ -18,11 +18,17 @@ function validateImageQuery(req: Request, res: Response, next: NextFunction) {
   }
 
   if (filename && !width) {
-    return res.status(400).send("Please append '&width=<WIDTH>' to the URL. Example: &width=500");
+    return res
+      .status(400)
+      .send("Please append '&width=<WIDTH>' to the URL. Example: &width=500");
   }
 
   if (filename && !height) {
-    return res.status(400).send("Please append '&height=<HEIGHT>' to the URL. Example: &height=500");
+    return res
+      .status(400)
+      .send(
+        "Please append '&height=<HEIGHT>' to the URL. Example: &height=500"
+      );
   }
 
   next();
