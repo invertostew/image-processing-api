@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs";
+import fs, { promises as fsPromises } from "fs";
 
 import supertest from "supertest";
 
@@ -9,7 +9,7 @@ const request = supertest(app);
 
 describe("Test endpoint responses", () => {
   describe("GET /api/images", () => {
-    afterEach(() => {
+    afterEach(async () => {
       const testImage = path.resolve(
         __dirname,
         "..",
@@ -22,7 +22,7 @@ describe("Test endpoint responses", () => {
       );
 
       if (fs.existsSync(testImage)) {
-        fs.unlinkSync(testImage);
+        fsPromises.unlink(testImage);
       }
     });
 
