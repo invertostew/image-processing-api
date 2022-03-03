@@ -33,12 +33,12 @@ async function processImage(req: Request, res: Response) {
   try {
     if (fs.existsSync(fullSizeImage)) {
       await sharp(fullSizeImage)
-      .resize(Number(width), Number(height))
-      .toFile(resizedImage);
+        .resize(Number(width), Number(height))
+        .toFile(resizedImage);
 
       res.sendFile(resizedImage);
     } else {
-      res.status(400).send('Sorry this file does not exist.');
+      res.status(400).send("Sorry this file does not exist.");
     }
   } catch (err) {
     res.status(500).json(err);
