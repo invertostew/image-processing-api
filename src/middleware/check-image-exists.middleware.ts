@@ -3,7 +3,11 @@ import fs from "fs";
 
 import { Request, Response, NextFunction } from "express";
 
-function checkImageExists(req: Request, res: Response, next: NextFunction) {
+function checkImageExists(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void {
   const { filename, width, height } = req.query;
   const resizedImage = path.resolve(
     __dirname,

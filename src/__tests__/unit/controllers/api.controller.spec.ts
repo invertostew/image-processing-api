@@ -7,8 +7,8 @@ import app from "../../../app";
 
 const request = supertest(app);
 
-describe("processImage", () => {
-  describe("the filename doesn't exist in assets/full", () => {
+describe("processImage", (): void => {
+  describe("the filename doesn't exist in assets/full", (): void => {
     it("returns a 500 internal server error", async (): Promise<void> => {
       const response = await request.get(
         "/api/images?filename=random&height=200&width=200"

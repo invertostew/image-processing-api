@@ -4,8 +4,8 @@ import app from "../../../app";
 
 const request = supertest(app);
 
-describe("validateImageQuery", () => {
-  describe("missing width from query", () => {
+describe("validateImageQuery", (): void => {
+  describe("missing width from query", (): void => {
     let response: supertest.Response;
     beforeEach(async (): Promise<void> => {
       response = await request.get("/api/images?filename=fjord");
@@ -25,7 +25,7 @@ describe("validateImageQuery", () => {
     });
   });
 
-  describe("missing height from query", () => {
+  describe("missing height from query", (): void => {
     let response: supertest.Response;
     beforeEach(async (): Promise<void> => {
       response = await request.get("/api/images?filename=fjord&width=500");

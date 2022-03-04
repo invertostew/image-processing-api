@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
-function validateImageQuery(req: Request, res: Response, next: NextFunction) {
+function validateImageQuery(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response<any, Record<string, any>> | undefined {
   const { filename, width, height } = req.query;
 
   if (Object.entries(req.query).length === 0 || !filename) {

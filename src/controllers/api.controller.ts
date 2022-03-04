@@ -4,7 +4,7 @@ import fs, { promises as fsPromises } from "fs";
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-async function processImage(req: Request, res: Response) {
+async function processImage(req: Request, res: Response): Promise<void> {
   const { filename, width, height } = req.query;
   const resizedDir = path.resolve(__dirname, "..", "..", "assets", "resized");
   const fullSizeImage = path.resolve(
