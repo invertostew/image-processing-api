@@ -35,6 +35,17 @@ function validateImageQuery(
       );
   }
 
+  if (
+    Number.isNaN(Number(width)) ||
+    Number.isNaN(Number(height)) ||
+    Number(width) <= 0 ||
+    Number(height) <= 0
+  ) {
+    return res
+      .status(400)
+      .send("Invalid width or height. Must be a number >= 1.");
+  }
+
   next();
 }
 
