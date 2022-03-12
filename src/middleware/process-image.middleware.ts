@@ -2,31 +2,15 @@ import path from "path";
 import fs, { promises as fsPromises } from "fs";
 
 import { Request, Response, NextFunction } from "express";
-import sharp from "sharp";
+
+import sharpImageProcessing from "../helpers/sharp-image-processing";
 
 async function processImage(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<Response<any, Record<string, any>> | undefined> {
-  const { filename, width, height } = req.query;
   const resizedDir = path.resolve(__dirname, "..", "..", "assets", "resized");
-  const fullSizeImage = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    "assets",
-    "full",
-    `${filename}.jpg`
-  );
-  const resizedImage = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    "assets",
-    "resized",
-    `${filename}-${width}x${height}.jpg`
-  );
 
   if (!fs.existsSync(resizedDir)) {
     await fsPromises.mkdir(
@@ -34,16 +18,20 @@ async function processImage(
     );
   }
 
-  try {
-    if (fs.existsSync(fullSizeImage)) {
-      await sharp(fullSizeImage)
-        .resize(Number(width), Number(height))
-        .toFile(resizedImage);
+  const { filename, width, height } = req.query;
 
-      res.locals.imageUrl = resizedImage;
-    } else {
+  try {
+    const image = await sharpImageProcessing(
+      filename as string,
+      Number(width),
+      Number(height)
+    );
+
+    if (!image) {
       return res.status(400).send("Sorry this file does not exist.");
     }
+
+    res.locals.imageUrl = image;
   } catch (err) {
     return res.status(500).json(err);
   }
